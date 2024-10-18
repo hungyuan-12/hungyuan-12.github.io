@@ -1,5 +1,56 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒數計時器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .countdown {
+            font-size: 48px;
+            margin: 20px;
+        }
+    </style>
+</head>
 <body>
-test
+
+    <h1>倒數計時器</h1>
+    <div class="countdown" id="countdown">00:00:00</div>
+
+    <script>
+        // 設定倒數時間 (例如，5分鐘 = 5 * 60 秒)
+        let countdownTime = 5 * 60;
+
+        // 倒數函數
+        function startCountdown() {
+            const countdownElement = document.getElementById('countdown');
+
+            const interval = setInterval(() => {
+                // 計算分鐘與秒數
+                const minutes = Math.floor(countdownTime / 60);
+                const seconds = countdownTime % 60;
+
+                // 格式化時間顯示
+                countdownElement.innerHTML = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+                // 當倒數時間結束時停止計時
+                if (countdownTime <= 0) {
+                    clearInterval(interval);
+                    countdownElement.innerHTML = '時間到！';
+                }
+
+                // 每次迴圈減少1秒
+                countdownTime--;
+            }, 1000);
+        }
+
+        // 開始倒數
+        startCountdown();
+    </script>
+
 </body>
 </html>
